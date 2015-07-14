@@ -11,12 +11,13 @@ var routes = require('./routes/index');
 
 var app = express();
 
-//app.use('/', routes);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//app.use('/', routes);
 app.use(partials());
 
 // uncomment after placing your favicon in /public
