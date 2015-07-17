@@ -7,14 +7,11 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon" /> 
 	</head>
 	<body>
-		<h2> Resultado</h2>
-			<p><%= respuesta %></p>
+		<form method="get" action="/quizes/<%= quiz.id %>/answer">
+			Pregunta: <%=quiz.pregunta%><p>
+		<input type="text" name="respuesta" value="Respuesta"/>
+		<input type="submit" value="Enviar">
+</form>
 
-			<% if( respuesta === 'Correcto'){%>
-				<a href="/quizes">Volver al listado de Preguntas</a>
-			<%}else{%>
-				<a href="/quizes/<%= quiz.id %>"> Reintentar</a>
-			<%}%>
-		
 	</body>
 </html>
