@@ -19,13 +19,13 @@ exports.index = function(req, res) {
 
 
 	if(string == null){
-		models.Quiz.findAll({order:'`tematica` ASC'}).then(function(quizes) {
+		models.Quiz.findAll({order:[['tematica','ASC']]}).then(function(quizes) {
 		res.render('quizes/index.ejs', { quizes: quizes, errors: []});
 		}).catch(function(error){ next(error);});
 	}else{
 		string = string.replace(" ","%");
 		string = "%"+string+"%";
-		models.Quiz.findAll({where:["pregunta like ? and tematica like ?", string, tema], order:'`tematica` ASC'}).then(function(quizes) {
+		models.Quiz.findAll({where:{ pregunta:{ $iLike: string}, tematica:{ $iLike: tema}}, order:[['tematica','ASC']]}).then(function(quizes) {
 		res.render('quizes/index.ejs', { quizes: quizes, errors: []});
 	}).catch(function(error){ next(error);});
 	}
