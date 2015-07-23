@@ -3,7 +3,7 @@ body 	{ background: #333;}
 #page-wrap:after { content: "Smartphone Layout";}
 
 h2 span, section h3 {display: none;}
-body 				{font-size: large;}
+body 				{font-size: smaller;}
 footer, input		{font-size: large;}
 nav  			{ 	margin: auto;
     					width: 80%;
@@ -29,3 +29,9 @@ button.newQuestion		{float: left;}
 
 table					{ padding-top: 30px;
 						  text-align: left;}
+
+p.tematica				{ float: left;}	
+
+td.header				{ width: 50%; border: 1px solid black;}
+
+td.body					{ float: left;}

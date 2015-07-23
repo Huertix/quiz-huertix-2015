@@ -3,3 +3,4 @@ n.DS_Store
 npm-debug.log
 quiz.sqlite
 .env
+.gitignore

@@ -15,6 +15,8 @@ exports.load = function(req, res, next, quizId){
 exports.index = function(req, res) {
 	
 	var string = req.query.search;
+	var tema = "%"+req.query.tema+"%";
+
 
 	if(string == null){
 		models.Quiz.findAll({order:'`tematica` ASC'}).then(function(quizes) {
@@ -23,7 +25,7 @@ exports.index = function(req, res) {
 	}else{
 		string = string.replace(" ","%");
 		string = "%"+string+"%";
-		models.Quiz.findAll({where:["pregunta like ?", string,], order:'`tematica` ASC'}).then(function(quizes) {
+		models.Quiz.findAll({where:["pregunta like ? and tematica like ?", string, tema], order:'`tematica` ASC'}).then(function(quizes) {
 		res.render('quizes/index.ejs', { quizes: quizes, errors: []});
 	}).catch(function(error){ next(error);});
 	}
@@ -58,7 +60,7 @@ exports.answer = function(req, res){
 // GET /quizes/new
 exports.new = function(req, res){
 	var quiz = models.Quiz.build(
-		{ pregunta: "Pregunta", Respuesta: "Respuesta"});
+		{ pregunta: "Pregunta", Respuesta: "Respuesta", Tematica: "Tematica"});
 
 		res.render('quizes/new',{quiz: quiz, errors: []});	
 };
@@ -73,7 +75,7 @@ exports.create = function(req, res){
 								if(err){
 									res.render('quizes/new',{quiz: quiz, errors: err.errors});	
 								}else{
-									quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+									quiz.save({fields: ["pregunta", "respuesta", "tematica"]}).then(function(){
 																							res.redirect('/quizes')})
 								}
 							}
