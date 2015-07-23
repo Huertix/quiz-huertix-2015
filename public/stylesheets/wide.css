@@ -1,19 +1,20 @@
 
-body 					{ background: #999;}
+body 					{ background: #999; }
+
+
 #page-wrap:after		{ content: "Wide Layout";}
 
-nav 					{ float: left; width: 15%; height: 400px;}
+nav 					{ float: left; width: 15%; height: auto }
 nav span 				{ margin: 0px 1000px 0px 0px;}
-section 				{ float: right; width: 80%; height: 400px}
+section 				{ float: right; width: 80%; height: 100%;}
 footer					{ clear: both; display: block;}
 fieldset 				{ width: 400px;
 						  padding-top: 10px;
 						  padding-bottom: 10px}
 
 label.field 			{ text-align: right;
-						  width: 50px;
-						  float: left;
-						  font-weight: bold;}
+						  width: 15%;
+						  float: left;}
 
 input.textbox-200		{ width: 200px;
 						  float: left;}
@@ -28,4 +29,7 @@ table					{ padding-top: 30px;
 						  text-align: left;}
 
 
+p.tematica				{ float: left;}	
+
+td.header				{ width: 50%; border: 1px solid black;}
 

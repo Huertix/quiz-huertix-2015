@@ -17,13 +17,13 @@ exports.index = function(req, res) {
 	var string = req.query.search;
 
 	if(string == null){
-		models.Quiz.findAll().then(function(quizes) {
+		models.Quiz.findAll({order:'`tematica` ASC'}).then(function(quizes) {
 		res.render('quizes/index.ejs', { quizes: quizes, errors: []});
 		}).catch(function(error){ next(error);});
 	}else{
 		string = string.replace(" ","%");
 		string = "%"+string+"%";
-		models.Quiz.findAll({where:["pregunta like ?", string]}).then(function(quizes) {
+		models.Quiz.findAll({where:["pregunta like ?", string,], order:'`tematica` ASC'}).then(function(quizes) {
 		res.render('quizes/index.ejs', { quizes: quizes, errors: []});
 	}).catch(function(error){ next(error);});
 	}
