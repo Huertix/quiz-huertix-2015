@@ -11,5 +11,7 @@ section > div 			{ padding: 20px}
 header, nav, section,img, iframe	{ background: #eee; text-align: center;}
 footer					{ background: #eee; text-align: center;}
 
+#ErrorMsgs				{color: #f61; font-size: smaler}
+
 
 
