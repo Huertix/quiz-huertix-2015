@@ -5,19 +5,29 @@
 		<link rel='stylesheet' href='/stylesheets/style.css' />
 		<link rel="icon" href="favicon.ico" type="image/x-icon" /> 
 	</head>
+
+
+
 	<body>
 		<label for="preg" class="rem">Pregunta: </label>
 		<input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>"/> <p>
 		<label for="resp" class="rem">Respuesta: </label>
 		<input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/> <p>
 		<label for="tema" class="rem">Temática: </label>
-		<select name="quiz[tematica]" >
+
+		<select name="quiz[tematica]" id="selectable">
 	  		<option value="Humanidades">Humanidades</option>
 	  		<option value="Ocio">Ocio</option>
 	  		<option value="Ciencia">Ciencia</option>
 	  		<option value="Tecnologia">Tecnología</option>
 	  		<option value="Geografía">Geografía</option>
 		</select><p>
+
+		<script type="text/javascript">
+			var element = document.getElementById('selectable');
+   			element.value = "<%=quiz.tematica%>";
+		</script>
+
 		<a href="/quizes"><button type="button">Cancelar</button></a>
 		<input type="submit" value="Salvar"/>
 
