@@ -9,9 +9,16 @@
 	<body>
 		<form method="get" action="/quizes/<%= quiz.id %>/answer">
 			Pregunta:<p><h1> <%=quiz.pregunta%></h1><p>
-		<input type="text" name="respuesta" placeholder="Respuesta"/>
-		<input type="submit" value="Enviar">
-</form>
+			<input type="text" name="respuesta" placeholder="Respuesta"/>
+			<input type="submit" value="Enviar">
+		</form>
+
+		<p><a href="/quizes/<%= quiz.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
+
+		<p><strong>Comentarios:</strong></p>
+		<%for(index in quiz.Comments){%>
+		<p>- <%=quiz.Comments[index].texto%></p>
+		<%}%>
 
 	</body>
 </html>
