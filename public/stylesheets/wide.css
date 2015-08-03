@@ -16,6 +16,10 @@ label.field 			{ text-align: right;
 						  width: 15%;
 						  float: left;}
 
+label.password			{text-align: left;
+						  width: 15%;
+						  float: left;}
+
 input.textbox-200		{ width: 200px;
 						  float: left;}
 

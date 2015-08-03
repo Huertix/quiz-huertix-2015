@@ -22,8 +22,9 @@
 				</p>
 				<p><label class="field" for="Texto"></label><input type="text" name="search" placeholder="Buscar" class="textbox-200"/>
 				<button type="Submit" class="submit">Enviar</button></p>
-				<p><a href="/quizes/new"><button type="button" class="newQuestion"> Crear Pregunta</button></a></p>
-				
+				<%if(session.user){%>
+					<p><a href="/quizes/new"><button type="button" class="newQuestion"> Crear Pregunta</button></a></p>
+				<%}%>
 				
 			</fieldset>
 		</form>
@@ -36,6 +37,7 @@
 					<%}%>
 							<tr >
 								<td><a href="quizes/<%=quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+								<%if(session.user){%>
 								<td class="body"><a href="quizes/<%=quizes[i].id %>/edit"><button>editar</button></a></td>
 								<td class="body">
 									<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
@@ -44,6 +46,7 @@
 										</button>
 									</form>
 								</td>
+								<%}%>
 							</tr>
 					
 					<% aux = quizes[i].tematica %>
