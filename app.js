@@ -13,6 +13,7 @@ var routes = require('./routes/index');
 
 var app = express();
 
+var isFromSession = false;
 
 
 // view engine setup
@@ -28,7 +29,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser('Quiz 2015'));
-app.use(session());
+app.use(session({ 
+            name: 'quiz-2015', // configuración de la cookie
+            secret: 'huertix',
+            resave: true,       // Forces the session to be saved back to the session store
+            rolling: true,      // Force a cookie to be set on every response. This resets the expiration date.
+            saveUninitialized: false,       //
+            cookie: { maxAge: 60000}  // Tiempo de la sesion, expiración de la cookie -> 30000 = 1min.
+            }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,16 +46,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
 
+    // Hacer visible req.session en las vistas
+    req.session.touch();
+    res.locals.session = req.session;  
     // guarda path en session.redir para despues de login
     if(!req.path.match(/\/login|\/logout/)){
-        req.session.redir = req.path;
+        req.session.redir = req.path;       
+    }
+    
+    if(req.session.user){
+        isFromSession = true;
+        console.log("en sesión");
+
+    }else{
+        if(isFromSession){
+            isFromSession = false;
+            console.log("fuera de la sesión");
+            var err = new Error('Sesión Finalizada');
+            err.status = 1001;
+            next(err);          
+        }
     }
 
-    // Hacer visible req.session en las vistas
-    res.locals.session = req.session;
+
     next();
 });
-
 
 
 app.use('/', routes);
@@ -58,6 +81,7 @@ app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+
 });
 
 // error handlers
@@ -71,6 +95,7 @@ if (app.get('env') === 'development') {
             message: err.message,
             error: err, errors: []
         });
+        
     });
 }
 
@@ -80,8 +105,9 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {}, errors: []
+        error: err, errors: []
     });
+    
 });
 
 

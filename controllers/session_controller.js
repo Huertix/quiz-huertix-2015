@@ -10,7 +10,7 @@ exports.loginRequired = function(req, res, next){
 
 
 
-// GET /loginew
+// GET /login new
 exports.new = function(req, res){
 	var errors = req.session.errors || {};
 	req.session.errors = {};
@@ -35,12 +35,17 @@ exports.create = function(req, res){
 		req.session.user = {id:user.id, username:user.username};
 
 		res.redirect(req.session.redir.toString());
+
 	});
 };
 
+
 // DELETE /logout
 exports.destroy = function(req, res){
-	delete req.session.user;
+	
+	if(req.session.user){
+		delete req.session.user;
+	}
 	res.redirect(req.session.redir.toString());
 };
 
