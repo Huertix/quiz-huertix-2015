@@ -64,7 +64,7 @@ app.use(function(req, res, next) {
             console.log("fuera de la sesión");
             var err = new Error('Sesión Finalizada');
             err.status = 1001;
-            next(err);          
+           //next(err);          
         }
     }
 

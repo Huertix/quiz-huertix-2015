@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" /> 
   </head>
   <body>
 		<h1><%= message %></h1>
 		<%if(error.status != 1001){%>
 			<h2><%= error.status %></h2>
 			<pre><%= error.stack %></pre>
-
 		<%}%>
-		<script>setTimeout(function(){window.location.href='/'}, 3000);</script>
+		<script>setTimeout(function(){window.location.href='/'}, 3000);</script>   
   </body>
-
-    
-
 </html>
