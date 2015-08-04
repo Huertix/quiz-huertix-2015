@@ -10,5 +10,16 @@ module.exports = function(sequelize, DataTypes){
 
 					}
 
+				},
+				{
+					classMethods: {	
+						count: function () {
+							return this.aggregate('QuizId', 'count', { distinct: false })
+						},
+						countCommentedQuizes: function () {
+							return this.aggregate('publicado', 'count', { distinct: false })
+						}	
+					}
 				});
 };
+
