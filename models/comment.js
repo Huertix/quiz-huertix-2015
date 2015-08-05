@@ -20,6 +20,9 @@ module.exports = function(sequelize, DataTypes){
 						count: function () {
 							return this.aggregate('QuizId', 'count', { distinct: false })
 						},
+						countUnpublished: function () {
+		    				return this.count({ where: { publicado: false } });
+		    			},
 						countCommentedQuizes: function () {
 							return this.aggregate('publicado', 'count', { distinct: false })
 						}	

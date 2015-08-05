@@ -14,5 +14,8 @@ p#blinking 			{text-decoration: blink;}
 
 #ErrorMsgs				{color: #f61; font-size: smaler}
 
+ul 						{ padding-left: 5%;
+						  text-align: left;}
+
 
 

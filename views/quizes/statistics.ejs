@@ -10,9 +10,18 @@
 
 	<body>
 		
-		 Total Preguntas:  <%=statistics.questions%><p>
-		 Total Comentario: <%=statistics.comments%><p>
-         Comentarios Aprovados: <%=statistics.published%>
+		<fieldset>
+			<legend>Estadísticas</legend> 
+				<ul>
+				 <li>Total Preguntas:  <%=statistics.questions%></li>
+				 <li>Total Comentario: <%=statistics.comments%></li>
+				 <li>Media de comentarios por pregunta: 
+				 			<%= statistics.questions?(statistics.comments / statistics.questions)
+				 			.toFixed(2):0 %></li>
+				 <li>Pendientes de Aprovación: <%=statistics.unpublished%></li>
+		         <li>Comentarios Aprovados: <%=statistics.published%></li>
+		        </ul>
+        </fieldset>
 
 	</body>
 </html> 

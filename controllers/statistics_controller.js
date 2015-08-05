@@ -27,7 +27,11 @@ exports.calculate = function(req, res, next) {
             return models.Comment.count();
         })
         .then(function(comments){
-        	statistics.comments = comments;
+            statistics.comments = comments;
+            return models.Comment.countUnpublished();
+        })
+        .then(function(unpublished){
+        	statistics.unpublished = unpublished;
         	return models.Comment.countCommentedQuizes();
         })
          .then(function(published){
