@@ -25,6 +25,7 @@ router.get('/author', function(req, res) {
   res.render('author', { title: 'Creditos', errors: [] });
 });
 
+
 router.get('/quizes', quizController.index)
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
@@ -40,6 +41,7 @@ router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 // modifica contenido en la DB
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
+router.delete('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)', sessionController.loginRequired, commentController.destroy);
 
 router.get('/quizes/statistics',     statisticsController.calculate, statisticsController.show);
 

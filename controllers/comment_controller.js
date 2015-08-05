@@ -28,10 +28,12 @@ exports.new = function(req, res){
 	res.render('comments/new.ejs',{quizid: req.params.quizId, errors: []});	
 };
 
+
 // POST /quizes/:quizId/comments
 exports.create = function(req, res){
 	var comment = models.Comment.build(
 		{ 	texto: req.body.comment.texto,
+			autor:  req.body.comment.author,
 			QuizId: req.params.quizId
 		});
 	
@@ -41,7 +43,7 @@ exports.create = function(req, res){
 				res.render('comments/new.ejs', {comment: comment, erros: err.errors});
 			}else{
 				comment //save: guarda en DB campo texto de comment
-				.save()
+				.save({fields: ["texto", "autor","QuizId"]})
 				.then( function(){ res.redirect('/quizes/'+req.params.quizId);});
 			}
 		}).catch(function(error){next(error)});
@@ -55,3 +57,12 @@ exports.publish = function(req, res){
 		.then(function(){ res.redirect('/quizes/'+req.params.quizId);})
 		.catch(function(error){next(error)});
 };
+
+
+exports.destroy = function(req, res){
+	req.comment.destroy().then( function() {
+		res.redirect('/quizes');
+	}).catch(function(error){ next(error)});
+};
+
+

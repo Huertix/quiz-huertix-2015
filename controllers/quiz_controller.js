@@ -72,7 +72,7 @@ exports.new = function(req, res){
 exports.create = function(req, res){
 	var quiz = models.Quiz.build( req.body.quiz );
 
-		// guarda en DB solo los campos pregunta y respuesta de quiz. Evitamos virus por entrada de mas parametros en la DB
+		// guarda en DB solo los campos pregunta,respuesta y tematica de quiz. Evitamos virus por entrada de mas parametros en la DB
 		
 		quiz.validate().then(function(err){
 								if(err){
@@ -102,7 +102,7 @@ exports.update = function(req, res){
 	req.quiz.validate().then(
 		function(err){
 			if(err){
-				res.render('quizes/edit', {quiz: req.quiz, erros: err.errors});
+				res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
 			}else{
 				req.quiz
 				.save( {fields: ["pregunta", "respuesta", "tematica"]})

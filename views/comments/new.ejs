@@ -9,7 +9,11 @@
 		Añadir comentario a pregunta <%=quizid%>: <p>
 		
 		<form method="post" action="/quizes/<%=quizid%>/comments/">
-			<input type="text" id="comment" name="comment[texto]" value=""/><p>
+			<input type="text" id="comment" name="comment[texto]" value="Nuevo Comentario"/><p>
+			<label for="author">Autor</label><br/>
+			<input type="text" id="Autor" name="comment[author]" 
+			value="<%if(session.user){%><%=session.user.username%><%}
+			else{%><%='anónimo'%><%}%>"/><p>
 			<button type="submit">Enviar</button>
 		</form>
 
